@@ -26,7 +26,7 @@ SELECT COUNT(*)
 FROM payment
 WHERE customer_id = 100
 
--- 7. What is the last name of our customer with first name 'ERICA'?
+-- 7. What is the last name of our customer with the first name 'ERICA'?
 SELECT first_name
 FROM customer
 WHERE first_name = 'ERICA'
@@ -36,11 +36,17 @@ SELECT COUNT(*)
 FROM rental
 WHERE return_date is null
 
---9. List of all the payment_ids with an amount less than or equal to $2.
+-- 9. List of all the payment_ids with an amount less than or equal to $2.
 SELECT payment_id, amount
 FROM payment
 WHERE amount <= 2
 
+-- 10. List of all the payments from customers 322, 346, and 354 where the amount is either less than $2 or greater than $10.
+-- Ordered by the customer first (ascending) and then as second condition order by the amount in descending order.
+SELECT * 
+FROM payment
+WHERE (customer_id IN (322, 346, 354)) AND (amount < 2 OR amount > 10)
+ORDER BY customer_id ASC, amount DESC
 
 
 
