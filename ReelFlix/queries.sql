@@ -54,8 +54,12 @@ FROM payment
 WHERE payment_date BETWEEN '2020-01-26' AND '2020-01-28'
 AND amount BETWEEN 1.99 AND 3.99
 
--- 12. Write a SQL query to get a list of the concerned payments with customer_id: 12,25,67,93,124,234. Customers with amounts 4.99, 7.99, and 9.99 in January 2020.
+-- 12. Get a list of the concerned payments with customer_id: 12,25,67,93,124,234. Customers with amounts 4.99, 7.99, and 9.99 in January 2020.
 SELECT * FROM payment
 WHERE customer_id IN(12,25,67,93,124,234)
 AND amount IN (4.99, 7.99, 9.99)
 AND payment_date BETWEEN '2020-01-01' AND '2020-02-01'
+
+-- 13. How many movies are there that contain the "Documentary" in the description?
+SELECT COUNT(*) FROM film
+WHERE description ILIKE '%doc%'
