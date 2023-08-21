@@ -106,3 +106,7 @@ WHERE DATE(payment_date) IN ('2020-04-28','2020-04-29', '2020-04-30')
 GROUP BY customer_id, DATE(payment_date)
 HAVING COUNT(*) > 1
 ORDER BY average_amount DESC
+
+-- 20. Find these customers and output the list of these first and last names in all lower case  
+SELECT LOWER(first_name), LOWER(last_name), LOWER(email)
+FROM customer
