@@ -63,3 +63,32 @@ AND payment_date BETWEEN '2020-01-01' AND '2020-02-01'
 -- 13. How many movies are there that contain the "Documentary" in the description?
 SELECT COUNT(*) FROM film
 WHERE description ILIKE '%doc%'
+
+-- 14, How many movies are there that contain 'Saga' in the description and where the title starts either with 'A' or ends with 'R'?
+SELECT COUNT(*) AS number_of_films 
+FROM film
+WHERE description LIKE '%Saga%'
+AND (title LIKE 'A%' 
+OR title LIKE '%R') 
+
+-- 15. Create a list of all customers where the first name contains 'ER' and has an 'A' as the second letter. Order the results by the last name descendingly.
+SELECT * FROM customer
+WHERE first_name LIKE '%ER%' 
+AND first_name LIKE '_A%' 
+ORDER BY last_name DESC
+
+-- 16. How many payments are there where the amount is either 0 or is between 3.99 and 7.99 and in the same time has happened on 2020-05-01
+SELECT COUNT(*) FROM payment
+WHERE (amount =  0 OR amount BETWEEN 3.99 AND 7.99)
+AND payment_date BETWEEN '2020-05-01' AND '2020-05-02'
+
+-- 17. Your manager wants to which of the two employees (staff_id) is responsible for more payments?
+SELECT staff_id, SUM(amount), COUNT(*) 
+FROM payment
+GROUP BY staff_id
+
+-- 18. Which employee had the highest sales amount in a single day? Which employee had the most sales in a single day.
+SELECT staff_id, DATE(payment_date), SUM(amount), COUNT(amount) 
+FROM payment
+GROUP BY staff_id, DATE(payment_date)
+ORDER BY SUM(amount) DESC
