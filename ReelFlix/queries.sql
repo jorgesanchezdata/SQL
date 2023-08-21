@@ -92,3 +92,17 @@ SELECT staff_id, DATE(payment_date), SUM(amount), COUNT(amount)
 FROM payment
 GROUP BY staff_id, DATE(payment_date)
 ORDER BY SUM(amount) DESC
+
+/*19. n 2020, April 28, 29, and 30 were days with very high revenue.
+That's why we want to focus on this task only these days.
+Find out what is the average payment amount grouped by
+customer and day – consider only the days/customers with
+more than 1 payment (per customer and day).
+Order by the average amount in descending order.*/
+
+SELECT customer_id, DATE(payment_date), ROUND(AVG(amount),2) AS average_amount, COUNT(*)
+FROM payment
+WHERE DATE(payment_date) IN ('2020-04-28','2020-04-29', '2020-04-30')
+GROUP BY customer_id, DATE(payment_date)
+HAVING COUNT(*) > 1
+ORDER BY average_amount DESC
