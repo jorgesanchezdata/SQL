@@ -150,3 +150,30 @@ SELECT film_id, ROUND(rental_rate / replacement_cost * 100, 2) as percentage
 FROM film
 WHERE ROUND(rental_rate / replacement_cost * 100, 2) < 4
 ORDER BY 2 ASC
+
+/* --28. create a tier list in the following way:
+1. Rating is 'PG' or 'PG-13' or length is more than 210 min:
+'Great rating or long (tier 1)
+2. Description contains 'Drama' and length is more than 90min:
+'Long drama (tier 2)'
+3. Description contains 'Drama' and length is not more than 90min:
+'Shcity drama (tier 3)'
+4. Rental_rate less than $1:
+'Very cheap (tier 4)'
+--28.1 How can you filter to only those movies that appear in one of these 4 tiers?
+  */
+SELECT
+title,
+CASE
+WHEN rating IN ('PG','PG-13') OR length > 210 THEN 'Great rating or long (tier 1)'
+WHEN description LIKE '%Drama%' AND length>90 THEN 'Long drama (tier 2)'
+WHEN description LIKE '%Drama%' THEN 'Short drama (tier 3)'
+WHEN rental_rate<1 THEN 'Very cheap (tier 4)'
+END as tier_list
+FROM film
+WHERE 
+CASE
+WHEN rating IN ('PG','PG-13') OR length > 210 THEN 'Great rating or long (tier 1)'
+WHEN description LIKE '%Drama%' AND length>90 THEN 'Long drama (tier 2)'
+WHEN description LIKE '%Drama%' THEN 'Short drama (tier 3)'
+WHEN rental_rate<1 THEN 'Very cheap (tier 4)'
