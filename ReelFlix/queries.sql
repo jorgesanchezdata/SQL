@@ -114,3 +114,33 @@ FROM customer
 --21. Extract the last 5 characters of the email address first. The email address always ends with '.org'.
 SELECT LEFT(RIGHT(email,4), 1), RIGHT(email,3)
 FROM customer
+
+-- 22. What's the month with the highest total payment amount?
+SELECT EXTRACT(month from payment_date) as Month,
+SUM(amount) as total_payment_amount
+FROM payment
+GROUP BY Month
+ORDER by total_payment_amount DESC
+
+-- 23. What's the day of the week with the highest total payment amount? (0 is Sunday)
+SELECT EXTRACT(dow from payment_date) as day_of_week,
+SUM(amount) as total_payment_amount
+FROM payment
+GROUP BY day_of_week
+
+-- 24. What's the highest amount one customer has spent in a week?
+SELECT customer_id, EXTRACT(week from payment_date) as week,
+SUM(amount) as total_payment_amount
+FROM payment
+GROUP BY week, customer_id
+
+--25. You need to create a list for the suppcity team of all rental durations of customers with customer_id 35.
+SELECT customer_id, return_date-rental_date as rental_duration
+FROM rental
+WHERE customer_id = 35
+
+-- 26. Also you need to find out for the suppcity team which customer has the longest average rental duration.
+SELECT customer_id, AVG(return_date-rental_date) as rental_duration
+FROM rental
+GROUP BY customer_id 
+ORDER BY rental_duration DESC
