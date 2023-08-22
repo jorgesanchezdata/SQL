@@ -107,6 +107,10 @@ GROUP BY customer_id, DATE(payment_date)
 HAVING COUNT(*) > 1
 ORDER BY average_amount DESC
 
--- 20. Find these customers and output the list of these first and last names in all lower case  
+-- 20. Find these customers and output the list of these first and last names in all lowercase  
 SELECT LOWER(first_name), LOWER(last_name), LOWER(email)
+FROM customer
+
+--21. Extract the last 5 characters of the email address first. The email address always ends with '.org'.
+SELECT LEFT(RIGHT(email,4), 1), RIGHT(email,3)
 FROM customer
