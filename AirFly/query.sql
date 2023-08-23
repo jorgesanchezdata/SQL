@@ -11,7 +11,7 @@ ELSE 'high price ticket'
 END as ticket_price
 FROM bookings
 
-/* -- 2. how many flights have departed in the
+/* -- 2. How many flights have departed in the
 following seasons:
 • Winter: December, January, February
 • Spring: March, April, May
@@ -28,3 +28,22 @@ ELSE 'Fall'
 END as season
 FROM flights
 GROUP BY season
+
+--3. How many people choose seats in the categories, Business, Economy, and Comfort?
+SELECT fare_conditions, COUNT(*)
+FROM boarding_passes b
+INNER JOIN seats s
+ON s.seat_no = b.seat_no
+GROUP BY fare_conditions
+
+--4. find out which seat has been chosen most frequently.
+SELECT s.seat_no, COUNT(*) as total
+FROM seats s
+LEFT JOIN boarding_passes b
+ON s.seat_no = b.seat_no
+GROUP BY s.seat_no
+ORDER BY total DESC
+
+--5. What are the customers (first_name, last_name, phone number, and their district) from Texas?
+
+--6. Are there any (old) addresses that are not related to any customer?
