@@ -1,4 +1,4 @@
-/* 1. • Low price ticket: total_amount < 20,000 
+ge /* 1. • Low price ticket: total_amount < 20,000 
       • Mid price ticket: total_amount between 20,000 and 150,000 
       • High price ticket: total_amount >= 150,000
 */
@@ -44,6 +44,12 @@ ON s.seat_no = b.seat_no
 GROUP BY s.seat_no
 ORDER BY total DESC
 
---5. What are the customers (first_name, last_name, phone number, and their district) from Texas?
+--5.The average amount of seats
+SELECT seat_no, ROUND(AVG(amount),2) 
+FROM boarding_passes b
+LEFT JOIN ticket_flights t
+ON b.ticket_no = t.ticket_no
+AND b.flight_id = t.flight_id
+GROUP BY seat_no
+ORDER by 2 DESC
 
---6. Are there any (old) addresses that are not related to any customer?
