@@ -1,4 +1,4 @@
-ge /* 1. • Low price ticket: total_amount < 20,000 
+/* 1. • Low price ticket: total_amount < 20,000 
       • Mid price ticket: total_amount between 20,000 and 150,000 
       • High price ticket: total_amount >= 150,000
 */
