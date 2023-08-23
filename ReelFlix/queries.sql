@@ -177,3 +177,17 @@ WHEN rating IN ('PG','PG-13') OR length > 210 THEN 'Great rating or long (tier 1
 WHEN description LIKE '%Drama%' AND length>90 THEN 'Long drama (tier 2)'
 WHEN description LIKE '%Drama%' THEN 'Short drama (tier 3)'
 WHEN rental_rate<1 THEN 'Very cheap (tier 4)'
+
+--29. What are the customers (first_name, last_name, phone number, and their district) from Texas?
+SELECT first_name, last_name, phone, district
+FROM customer c
+LEFT JOIN address a
+ON c.address_id = a.address_id
+WHERE district = 'Texas'
+
+--30. Are there any (old) addresses that are not related to any customer?
+SELECT *
+FROM address a
+LEFT JOIN customer c
+ON c.address_id = a.address_id
+WHERE c.customer_id is null
